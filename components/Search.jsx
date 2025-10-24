@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Search, MapPin, Cloud, Sun, CloudRain, CloudSnow, Eye, Droplets, Wind } from 'lucide-react';
 import axios from 'axios';
+import { Vortex } from 'react-loader-spinner';
 
 export default function WeatherApp() {
     const [query, setQuery] = useState('');
@@ -115,7 +116,7 @@ export default function WeatherApp() {
                 </div>
 
                 {isLoading && (
-                    <div className="text-center text-white text-lg">Ob-havo ma'lumotlari yuklanmoqda...</div>
+                    <div className="mb-10 text-white text-lg flex justify-center  items-center "><Vortex/></div>
                 )}
 
                 {error && (

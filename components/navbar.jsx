@@ -19,7 +19,7 @@ export default function Navbar() {
             <a href="#" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
               Shaharlar
             </a>
-            <a href="#" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
+            <a href="./xarita" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
               Xarita
             </a>
             <a href="#" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">

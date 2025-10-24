@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import Navbar from '@/components/navbar'
 import SearchBar from '@/components/Search'
 import React from 'react'
@@ -9,6 +10,7 @@ export default function App() {
         <Navbar /> 
         <SearchBar />
       </header>
+      <Footer/>
     </div>
   )
 }
