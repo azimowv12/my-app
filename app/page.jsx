@@ -9,8 +9,8 @@ export default function App() {
       <header className='header min-h-screen bg-no-repeat bg-cover'>
         <Navbar /> 
         <SearchBar />
-      </header>
       <Footer/>
+      </header>
     </div>
   )
 }

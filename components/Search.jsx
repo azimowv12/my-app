@@ -4,12 +4,26 @@ import { useState, useEffect } from 'react';
 import { Search, MapPin, Cloud, Sun, CloudRain, CloudSnow, Eye, Droplets, Wind } from 'lucide-react';
 import axios from 'axios';
 import { Vortex } from 'react-loader-spinner';
+import ReactCountryFlag from "react-country-flag";
 
 export default function WeatherApp() {
     const [query, setQuery] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+
+    const cities = [
+        { name: 'Buxoro', country: 'UZ', countryCode: 'UZ' },
+        { name: 'Toshkent', country: 'UZ', countryCode: 'UZ' },
+        { name: 'Samarqand', country: 'UZ', countryCode: 'UZ' },
+        { name: 'Xiva', country: 'UZ', countryCode: 'UZ' },
+        { name: 'Andijon', country: 'UZ', countryCode: 'UZ' },
+        { name: 'Moscow', country: 'RU', countryCode: 'RU' },
+        { name: 'London', country: 'GB', countryCode: 'GB' },
+        { name: 'New York', country: 'US', countryCode: 'US' },
+        { name: 'Tokyo', country: 'JP', countryCode: 'JP' },
+        { name: 'Istanbul', country: 'TR', countryCode: 'TR' }
+    ];
 
     const fetchWeather = async (cityName) => {
         if (!cityName.trim()) return;
@@ -40,9 +54,20 @@ export default function WeatherApp() {
         fetchWeather(query);
     };
 
-    const handleQuickCity = (city) => {
-        setQuery(city);
-        fetchWeather(city);
+    const handleCitySelect = (e) => {
+        const selectedCity = e.target.value;
+        if (selectedCity) {
+            const city = cities.find(c => c.name === selectedCity);
+            if (city) {
+                setQuery(city.name);
+                fetchWeather(city.name);
+            }
+        }
+    };
+
+    const handleQuickCity = (cityName) => {
+        setQuery(cityName);
+        fetchWeather(cityName);
     };
 
     const getWeatherIcon = (weatherMain) => {
@@ -70,16 +95,28 @@ export default function WeatherApp() {
         });
     };
 
+    const getCountryCode = (countryCode) => {
+        const countryMap = {
+            'UZ': 'UZ',
+            'RU': 'RU',
+            'US': 'US',
+            'GB': 'GB',
+            'JP': 'JP',
+            'TR': 'TR'
+        };
+        return countryMap[countryCode] || countryCode;
+    };
+
     return (
-        <div className="min-h-screen  p-4">
+        <div className="min-h-screen p-4">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-bold text-white mb-2">Ob-havo Dasturi</h1>
-                    <p className="text-white/80">Shahar nomini kiriting va ob-havoni ko'ring</p>
+                    <p className="text-white/80">Shahar nomini kiriting yoki tanlang va ob-havoni ko'ring</p>
                 </div>
 
                 <div className="w-full max-w-2xl mx-auto mb-8">
-                    <form onSubmit={handleSubmit} className="relative">
+                    <form onSubmit={handleSubmit} className="relative mb-4">
                         <div className="relative">
                             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                             <input
@@ -101,22 +138,30 @@ export default function WeatherApp() {
                         </div>
                     </form>
 
-                    <div className="flex flex-wrap gap-3 mt-4 justify-center">
-                        {['Buxoro', 'Toshkent', 'Samarqand', 'Xiva', 'Andijon'].map((city) => (
-                            <button
-                                key={city}
-                                onClick={() => handleQuickCity(city)}
-                                disabled={isLoading}
-                                className="px-4 py-2 bg-white/10 hover:bg-white/20 disabled:bg-white/5 backdrop-blur-md rounded-full text-white text-sm font-medium transition-all duration-200 border border-white/20 disabled:border-white/10"
-                            >
-                                {city}
-                            </button>
-                        ))}
+                    {/* City Select Dropdown */}
+                    <div className="mb-4">
+                        <select
+                            onChange={handleCitySelect}
+                            value=""
+                            className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200"
+                            disabled={isLoading}
+                        >
+                            <option value="">Shaharni tanlang...</option>
+                            {cities.map((city, index) => (
+                                <option key={index} value={city.name} className="text-gray-800">
+                                    {city.name}, {city.country}
+                                </option>
+                            ))}
+                        </select>
                     </div>
+
+                    
                 </div>
 
                 {isLoading && (
-                    <div className="mb-10 text-white text-lg flex justify-center  items-center "><Vortex/></div>
+                    <div className="mb-10 text-white text-lg flex justify-center items-center">
+                        <Vortex />
+                    </div>
                 )}
 
                 {error && (
@@ -128,9 +173,20 @@ export default function WeatherApp() {
                 {weatherData && (
                     <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 border border-white/30">
                         <div className="text-center mb-8">
-                            <h2 className="text-2xl font-bold text-white mb-2">
-                                {weatherData.city.name}, {weatherData.city.country}
-                            </h2>
+                            <div className="flex items-center justify-center space-x-2 mb-2">
+                                <h2 className="text-2xl font-bold text-white">
+                                    {weatherData.city.name}, {weatherData.city.country}
+                                </h2>
+                                <ReactCountryFlag 
+                                    countryCode={getCountryCode(weatherData.city.country)}
+                                    svg
+                                    style={{
+                                        width: '28px',
+                                        height: '21px',
+                                    }}
+                                    title={weatherData.city.country}
+                                />
+                            </div>
                             <p className="text-white/80 mb-4">{getCurrentDate()}</p>
 
                             <div className="flex items-center justify-center space-x-4 mb-4">
@@ -171,7 +227,7 @@ export default function WeatherApp() {
 
                         <div>
                             <h3 className="text-xl font-bold text-white mb-4">Keyingi 5 kun</h3>
-                            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 ">
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                                 {weatherData.list.filter((_, index) => index % 8 === 0).slice(0, 5).map((day, index) => (
                                     <div key={index} className="bg-white/10 rounded-xl p-3 text-center flex flex-col items-center">
                                         <div className="text-white font-medium mb-2">
@@ -190,8 +246,6 @@ export default function WeatherApp() {
                         </div>
                     </div>
                 )}
-
- 
             </div>
         </div>
     );

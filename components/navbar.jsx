@@ -13,16 +13,16 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
+            <a href=" ./" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
               Bosh Sahifa
             </a>
-            <a href="#" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
+            <a href="./city" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
               Shaharlar
             </a>
             <a href="./xarita" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
               Xarita
             </a>
-            <a href="#" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
+            <a href="./about" className="text-white hover:text-yellow-300 transition-colors duration-200 font-medium">
               Ma'lumot
             </a>
           </div>
