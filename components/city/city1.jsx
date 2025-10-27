@@ -73,15 +73,8 @@ export default function Shaharlar({ onBack, onCitySelect }) {
     return (
         <div className="min-h-screen bg-black/80">
             <div className="max-w-6xl mx-auto">
-                {/* Header */}
                 <div className="flex items-center justify-between mb-8">
-                    <button
-                        onClick={onBack}
-                        className="flex items-center space-x-2 text-white hover:text-white/80 transition-colors duration-200 bg-white/20 backdrop-blur-md rounded-xl px-4 py-3 border border-white/30"
-                    >
-                        <ArrowLeft className="h-5 w-5" />
-                        <span>Orqaga</span>
-                    </button>
+                  
                     <h1 className="text-3xl font-bold text-white flex items-center space-x-3">
                         <MapPin className="h-8 w-8" />
                         <span>Shaharlar Katalogi</span>
@@ -89,7 +82,6 @@ export default function Shaharlar({ onBack, onCitySelect }) {
                     <div className="w-32"></div>
                 </div>
 
-                {/* Search */}
                 <div className="mb-6">
                     <div className="relative">
                         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -103,7 +95,6 @@ export default function Shaharlar({ onBack, onCitySelect }) {
                     </div>
                 </div>
 
-                {/* Categories */}
                 <div className="flex flex-wrap gap-2 mb-8">
                     {Object.entries(categories).map(([key, category]) => (
                         <button
@@ -124,7 +115,6 @@ export default function Shaharlar({ onBack, onCitySelect }) {
                     ))}
                 </div>
 
-                {/* Cities Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     {filteredCities.map((city, index) => (
                         <div
@@ -168,7 +158,6 @@ export default function Shaharlar({ onBack, onCitySelect }) {
                     ))}
                 </div>
 
-                {/* Empty State */}
                 {filteredCities.length === 0 && (
                     <div className="text-center py-12">
                         <MapPin className="h-16 w-16 text-white/50 mx-auto mb-4" />
@@ -180,7 +169,6 @@ export default function Shaharlar({ onBack, onCitySelect }) {
                     </div>
                 )}
 
-                {/* Statistics */}
                 <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
                     <h3 className="text-xl font-bold text-white mb-4">Katalog Ma'lumotlari</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">

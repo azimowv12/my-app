@@ -63,17 +63,15 @@ export default function Malumot1() {
     return (
         <div className="min-h-screenp-4">
             <div className="max-w-6xl mx-auto">
-                {/* Header */}
                 <div className="flex items-center justify-between mb-8">
 
                     <h1 className="text-3xl text-center font-bold text-white flex items-center space-x-3">
                         <Info className="h-8 w-8" />
                         <span>Dastur Haqida Ma'lumot</span>
                     </h1>
-                    <div className="w-32"></div> {/* Balance uchun bo'sh div */}
+                    <div className="w-32"></div>
                 </div>
 
-                {/* Tabs */}
                 <div className="flex space-x-1 mb-8 bg-white/20 backdrop-blur-md rounded-2xl p-2 border border-white/30">
                     {[
                         { id: 'about', label: 'Dastur Haqida', icon: <Info className="h-4 w-4" /> },
@@ -95,9 +93,7 @@ export default function Malumot1() {
                     ))}
                 </div>
 
-                {/* Content */}
                 <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 border border-white/30">
-                    {/* About Tab */}
                     {activeTab === 'about' && (
                         <div className="space-y-8">
                             <div className="text-center mb-8">
@@ -150,7 +146,6 @@ export default function Malumot1() {
                         </div>
                     )}
 
-                    {/* Tech Tab */}
                     {activeTab === 'tech' && (
                         <div className="space-y-8">
                             <h2 className="text-3xl font-bold text-white text-center mb-8">Ishlatilgan Texnologiyalar</h2>
@@ -187,7 +182,6 @@ export default function Malumot1() {
                         </div>
                     )}
 
-                    {/* Terms Tab */}
                     {activeTab === 'terms' && (
                         <div className="space-y-8">
                             <h2 className="text-3xl font-bold text-white text-center mb-8">Ob-havo Atamalari</h2>
@@ -222,8 +216,6 @@ export default function Malumot1() {
                             </div>
                         </div>
                     )}
-
-                    {/* Team Tab */}
                     {activeTab === 'team' && (
                         <div className="space-y-8">
                             <h2 className="text-3xl font-bold text-white text-center mb-8">Loyiha Jamosi</h2>
